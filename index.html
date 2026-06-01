@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio — Muniba</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #f5f0e8; --dark: #1a1610; --warm: #c8a96e;
+      --accent: #e05c2a; --muted: #7a7060;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(245,240,232,0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,169,110,0.2);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--dark); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .hero {
+      min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; padding: 6rem 4rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -10%; right: -5%;
+      width: 55vw; height: 55vw; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,169,110,0.18) 0%, transparent 70%);
+    }
+    .hero-tag {
+      display: inline-block; font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
+      border: 1px solid var(--accent); padding: 0.35rem 0.9rem; border-radius: 2rem;
+      margin-bottom: 1.8rem; animation: fadeUp 0.8s 0.1s both;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; animation: fadeUp 0.8s 0.2s both;
+    }
+    .hero h1 em { font-style: italic; color: var(--warm); }
+    .hero-sub { margin-top: 1.5rem; font-size: 1.1rem; color: var(--muted); line-height: 1.7; font-weight: 300; animation: fadeUp 0.8s 0.35s both; }
+    .hero-cta { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; animation: fadeUp 0.8s 0.5s both; }
+    .btn { display: inline-block; text-decoration: none; padding: 0.85rem 2.2rem; border-radius: 0.3rem; font-size: 0.9rem; font-weight: 500; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .btn-primary { background: var(--dark); color: var(--cream); }
+    .btn-outline { background: transparent; color: var(--dark); border: 1.5px solid var(--dark); }
+    .hero-image-col { display: flex; justify-content: center; align-items: center; animation: fadeIn 1s 0.4s both; }
+    .avatar-wrap { position: relative; width: 340px; height: 400px; }
+    .avatar-bg { position: absolute; inset: 0; background: linear-gradient(135deg, var(--warm) 0%, #e8c98a 100%); border-radius: 2rem 2rem 50% 50%; opacity: 0.25; }
+    .avatar-frame {
+      position: absolute; inset: 20px; border: 2px solid rgba(200,169,110,0.5);
+      border-radius: 1.5rem 1.5rem 48% 48%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #fff8ee 0%, #f0e8d4 100%);
+    }
+    .avatar-initials { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; color: var(--warm); line-height: 1; }
+    .avatar-label { margin-top: 0.5rem; font-size: 0.8rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge { position: absolute; background: var(--dark); color: var(--cream); padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 500; white-space: nowrap; }
+    .badge-1 { bottom: 40px; left: -20px; }
+    .badge-2 { top: 60px; right: -30px; background: var(--accent); }
+    section { padding: 6rem 4rem; }
+    .section-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 1rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 3rem; }
+    .about { background: var(--dark); color: var(--cream); }
+    .about .section-label { color: var(--warm); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .about p { color: rgba(245,240,232,0.75); line-height: 1.9; font-weight: 300; font-size: 1.05rem; }
+    .about p + p { margin-top: 1.2rem; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .stat-item { border-top: 1px solid rgba(200,169,110,0.3); padding-top: 1.5rem; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--warm); line-height: 1; }
+    .stat-desc { margin-top: 0.4rem; font-size: 0.85rem; color: rgba(245,240,232,0.5); letter-spacing: 0.05em; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.2rem; }
+    .skill-card { background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: 1rem; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .skill-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.09); }
+    .skill-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .skill-name { font-weight: 600; font-size: 0.95rem; }
+    .skill-level { margin-top: 0.8rem; height: 4px; border-radius: 2px; background: #eee; overflow: hidden; }
+    .skill-fill { height: 100%; border-radius: 2px; background: var(--warm); }
+    .projects { background: #faf7f2; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+    .project-card { background: white; border-radius: 1.2rem; overflow: hidden; border: 1px solid rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s; }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,0.1); }
+    .project-thumb { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
+    .thumb-1 { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+    .thumb-2 { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+    .thumb-3 { background: linear-gradient(135deg, #d4fc79, #96e6a1); }
+    .project-body { padding: 1.5rem; }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+    .tag { font-size: 0.72rem; padding: 0.25rem 0.7rem; border-radius: 2rem; background: rgba(200,169,110,0.15); color: var(--muted); font-weight: 500; }
+    .project-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .project-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+    .project-links { display: flex; gap: 1rem; margin-top: 1.2rem; }
+    .project-link { font-size: 0.8rem; font-weight: 500; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .project-link:hover { border-color: var(--accent); }
+    .contact { background: var(--dark); color: var(--cream); text-align: center; }
+    .contact .section-label { color: var(--warm); }
+    .contact .section-title { color: var(--cream); max-width: 600px; margin: 0 auto 1.5rem; }
+    .contact-sub { color: rgba(245,240,232,0.6); font-size: 1rem; margin-bottom: 3rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .contact-pill { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.8rem; border-radius: 3rem; border: 1px solid rgba(200,169,110,0.4); color: var(--cream); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: background 0.2s; }
+    .contact-pill:hover { background: rgba(200,169,110,0.15); }
+    footer { background: #0e0c08; color: rgba(245,240,232,0.4); text-align: center; padding: 2rem 4rem; font-size: 0.82rem; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; } .nav-links { gap: 1.5rem; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; text-align: center; }
+      .hero-cta { justify-content: center; } .hero-image-col { display: none; }
+      section { padding: 4rem 1.5rem; } .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    @media (max-width: 500px) { .nav-links { display: none; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="#">Muniba.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <span class="hero-tag">Available for hire ✦</span>
+      <h1>Creative<br><em>Developer</em><br>&amp; Designer</h1>
+      <p class="hero-sub">Hi, I'm Muniba! I build beautiful, fast, and user-friendly digital experiences. Turning ideas into products people love.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-image-col">
+      <div class="avatar-wrap">
+        <div class="avatar-bg"></div>
+        <div class="avatar-frame">
+          <div class="avatar-initials">MZ</div>
+          <div class="avatar-label">Muniba Zulfiqar</div>
+        </div>
+        <div class="badge badge-1">🚀 Always Learning</div>
+        <div class="badge badge-2">💼 Open to Work</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="reveal">
+      <p class="section-label">Who I Am</p>
+      <div class="about-grid">
+        <div>
+          <h2 class="section-title" style="color:var(--cream)">Passionate about crafting <em style="color:var(--warm);font-style:italic">great</em> experiences</h2>
+          <p>Hi! I'm Muniba, a developer and designer who loves creating beautiful things on the web. I enjoy turning complex problems into simple, elegant solutions.</p>
+          <p>When I'm not coding, you'll find me exploring new technologies, learning new skills, or enjoying a good cup of chai ☕.</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-item"><div class="stat-num">10+</div><div class="stat-desc">Projects Completed</div></div>
+          <div class="stat-item"><div class="stat-num">1+</div><div class="stat-desc">Years Experience</div></div>
+          <div class="stat-item"><div class="stat-num">5+</div><div class="stat-desc">Happy Clients</div></div>
+          <div class="stat-item"><div class="stat-num">5★</div><div class="stat-desc">Average Rating</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="reveal">
+      <p class="section-label">What I Do</p>
+      <h2 class="section-title">Skills &amp; Technologies</h2>
+      <div class="skills-grid">
+        <div class="skill-card"><div class="skill-icon">🌐</div><div class="skill-name">HTML &amp; CSS</div><div class="skill-level"><div class="skill-fill" style="width:90%"></div></div></div>
+        <div class="skill-card"><div class="skill-icon">⚡</div><div class="skill-name">JavaScript</div><div class="skill-level"><div class="skill-fill" style="width:75%"></div></div></div>
+        <div class="skill-card"><div class="skill-icon">🎨</div><div class="skill-name">UI / UX Design</div><div class="skill-level"><div class="skill-fill" style="width:80%"></div></div></div>
+        <div class="skill-card"><div class="skill-icon">⚛️</div><div class="skill-name">React</div><div class="skill-level"><div class="skill-fill" style="width:65%"></div></div></div>
+        <div class="skill-card"><div class="skill-icon">🐍</div><div class="skill-name">Python</div><div class="skill-level"><div class="skill-fill" style="width:70%"></div></div></div>
+        <div class="skill-card"><div class="skill-icon">🗄️</div><div class="skill-name">Databases</div><div class="skill-level"><div class="skill-fill" style="width:60%"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects" id="projects">
+    <div class="reveal">
+      <p class="section-label">My Work</p>
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-thumb thumb-1">🌸</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+            <div class="project-title">Project One</div>
+            <p class="project-desc">Add your project description here. What did you build? What problem does it solve?</p>
+            <div class="project-links"><a class="project-link" href="#">Live Demo →</a><a class="project-link" href="#">GitHub →</a></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb thumb-2">💡</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="tag">React</span><span class="tag">Node.js</span></div>
+            <div class="project-title">Project Two</div>
+            <p class="project-desc">Add your project description here. What did you build? What problem does it solve?</p>
+            <div class="project-links"><a class="project-link" href="#">Live Demo →</a><a class="project-link" href="#">GitHub →</a></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb thumb-3">🚀</div>
+          <div class="project-body">
+            <div class="project-tags"><span class="tag">Python</span><span class="tag">Firebase</span></div>
+            <div class="project-title">Project Three</div>
+            <p class="project-desc">Add your project description here. What did you build? What problem does it solve?</p>
+            <div class="project-links"><a class="project-link" href="#">Live Demo →</a><a class="project-link" href="#">GitHub →</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="reveal">
+      <p class="section-label">Let's Connect</p>
+      <h2 class="section-title">Have a project in mind? Let's talk.</h2>
+      <p class="contact-sub">I'm currently open to freelance work and opportunities. Drop me a message!</p>
+      <div class="contact-links">
+        <a class="contact-pill" href="mailto:you@email.com">✉️ your@email.com</a>
+        <a class="contact-pill" href="#">🐙 GitHub</a>
+        <a class="contact-pill" href="#">💼 LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer><p>© 2026 Muniba Zulfiqar. Built with passion &amp; code. ✦</p></footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => observer.observe(r));
+  </script>
+</body>
+</html>
